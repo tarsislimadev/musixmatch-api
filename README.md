@@ -1,0 +1,5 @@
+# musixmatch
+
+## License
+
+[MIT](./LICENSE)
