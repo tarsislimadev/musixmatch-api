@@ -4,7 +4,17 @@
 
 method="track.lyrics.get"
 
-track_id=$( echo "${1}" | sed -e 's/ /+/ig' )
+echo
+echo "method: ${method}"
+echo
+
+echo musixmatch track id:
+
+read track_id
+
+echo
+echo "track_id: ${track_id}"
+echo
 
 # while
 
