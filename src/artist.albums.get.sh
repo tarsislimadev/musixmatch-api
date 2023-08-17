@@ -2,6 +2,8 @@
 
 # before
 
+. .env
+
 method="artist.albums.get"
 
 echo
@@ -18,6 +20,6 @@ resp=$( bash musixmatch.sh "${method}" "page_size=80&artist_id=${artist_id}" | j
 
 # after
 
-bash create_file.sh "./data/musixmatch/${method}/${artist_id}/" "artist_id" "${artist_id}"
+bash create_file.sh "${method}" "${artist_id}" "artist_id" "${artist_id}"
 
-bash create_file.sh "./data/musixmatch/${method}/${artist_id}/" "json" "${resp}"
+bash create_file.sh "${method}" "${artist_id}" "json" "${resp}"

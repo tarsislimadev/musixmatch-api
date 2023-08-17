@@ -2,6 +2,8 @@
 
 # before
 
+. .env
+
 method="track.lyrics.get"
 
 echo
@@ -22,6 +24,6 @@ resp=$( bash musixmatch.sh "${method}" "track_id=${track_id}" | jq )
 
 # after
 
-bash create_file.sh "./data/musixmatch/${method}/${track_id}/" "track_id" "${track_id}"
+bash create_file.sh "${method}" "${track_id}" "track_id" "${track_id}"
 
-bash create_file.sh "./data/musixmatch/${method}/${track_id}/" "json" "${resp}"
+bash create_file.sh "${method}" "${track_id}" "json" "${resp}"
