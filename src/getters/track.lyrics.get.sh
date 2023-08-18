@@ -14,6 +14,10 @@ echo musixmatch track id:
 
 read track_id
 
+if [[ -z "${track_id}" ]]; then
+  track_id="${1}"
+fi
+
 echo
 echo "track_id: ${track_id}"
 echo

@@ -14,6 +14,10 @@ echo musixmatch album_id:
 
 read album_id
 
+if [[ -z "${album_id}" ]]; then
+  album_id="${1}"
+fi
+
 # runner
 
 resp=$( bash musixmatch.sh "${method}" "album_id=${album_id}" | jq )

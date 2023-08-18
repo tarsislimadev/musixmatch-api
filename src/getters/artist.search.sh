@@ -14,6 +14,10 @@ echo musixmatch artist:
 
 read artist
 
+if [[ -z "${artist}" ]]; then
+  artist="${1}"
+fi
+
 q_artist=$( echo "${artist}" | sed -e 's/ /+/ig' )
 
 echo
