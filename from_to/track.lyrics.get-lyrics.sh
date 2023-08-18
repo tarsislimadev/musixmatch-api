@@ -1,12 +1,12 @@
 #!/bin/sh
 
-# before
+# inputs
 
 from="track.lyrics.get"
 
 to="lyrics"
 
-# while
+# runner
 
 track_lyrics=$( ls "${DATABASE}/${from}" )
 
@@ -24,7 +24,7 @@ lyrics_id=$( echo "${body}" | jq '.lyrics?.lyrics_id' )
 
 lyrics_body=$( echo "${body}" | jq '.lyrics?.lyrics_body' | sed -e 's/\\n/. /ig' )
 
-# after
+# outputs
 
 bash create_file "${to}" "${lyrics_id}" "lyrics_id" "${lyrics_id}"
 
