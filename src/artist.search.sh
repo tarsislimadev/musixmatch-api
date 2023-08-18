@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-# before
+# inputs
 
 . .env
 
@@ -20,11 +20,11 @@ echo
 echo "q_artist: ${q_artist}"
 echo
 
-# while
+# runner
 
 resp=$( bash musixmatch.sh "${method}" "page_size=80&q_artist=${q_artist}" | jq )
 
-# after
+# outputs
 
 bash create_file.sh "${method}" "${q_artist}" "q_artist" "${q_artist}"
 

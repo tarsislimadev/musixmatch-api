@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-# before
+# inputs
 
 . .env
 
@@ -14,11 +14,11 @@ echo musixmatch artist_id:
 
 read artist_id
 
-# while
+# runner
 
 resp=$( bash musixmatch.sh "${method}" "artist_id=${artist_id}" | jq )
 
-# after
+# outputs
 
 bash create_file.sh "${method}" "${artist_id}" "artist_id" "${artist_id}"
 

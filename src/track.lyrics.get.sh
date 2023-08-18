@@ -1,6 +1,6 @@
 #!/usr/bin/sh
 
-# before
+# inputs
 
 . .env
 
@@ -18,11 +18,11 @@ echo
 echo "track_id: ${track_id}"
 echo
 
-# while
+# runner
 
 resp=$( bash musixmatch.sh "${method}" "track_id=${track_id}" | jq )
 
-# after
+# outputs
 
 bash create_file.sh "${method}" "${track_id}" "track_id" "${track_id}"
 
