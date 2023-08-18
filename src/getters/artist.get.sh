@@ -12,7 +12,7 @@ echo
 
 echo musixmatch artist_id:
 
-read artist_id
+artist_id=
 
 if [[ -z "${artist_id}" ]]; then
   artist_id="${1}"

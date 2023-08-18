@@ -12,7 +12,7 @@ echo
 
 echo musixmatch album_id:
 
-read album_id
+album_id=
 
 if [[ -z "${album_id}" ]]; then
   album_id="${1}"

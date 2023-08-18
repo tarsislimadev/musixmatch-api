@@ -12,7 +12,7 @@ echo
 
 echo musixmatch artist:
 
-read artist
+artist=
 
 if [[ -z "${artist}" ]]; then
   artist="${1}"
