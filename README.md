@@ -1,10 +1,6 @@
-# musixmatch
+# MusixMatch
 
-## 
-
-```sh
-echo "" | sed -e 's/ /+/ig' 
-```
+From MusixMatch to local file system
 
 ## License
 
