@@ -8,19 +8,15 @@ method="artist.get"
 
 echo
 echo "method: ${method}"
+
+artist_id="${1}"
+
 echo
-
-echo musixmatch artist_id:
-
-artist_id=
-
-if [[ -z "${artist_id}" ]]; then
-  artist_id="${1}"
-fi
+echo "artist_id: ${artist_id}"
 
 # runner
 
-resp=$( bash musixmatch.sh "${method}" "artist_id=${artist_id}" | jq )
+resp=$( bash curl.sh "${method}" "artist_id=${artist_id}" | jq )
 
 # outputs
 

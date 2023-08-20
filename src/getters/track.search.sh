@@ -10,23 +10,27 @@ echo
 echo "method: ${method}"
 echo
 
-echo musixmatch artist:
+artist="${1}"
 
-artist=
+echo
+echo "artist: ${artist}"
+echo
 
-if [[ -z "${artist}" ]]; then
-  artist="${1}"
-fi
-
-q_artist=$( echo "${artist}" | sed -e 's/ /+/ig' )
+q_artist=$( bash accents.sh "${artist}" )
 
 echo
 echo "q_artist: ${q_artist}"
 echo
 
+page_size=80
+
+echo
+echo "page_size: ${page_size}"
+echo
+
 # runner
 
-resp=$( bash musixmatch.sh "${method}" "page_size=80&q_artist=${q_artist}" | jq )
+resp=$( bash curl.sh "${method}" "page_size=${page_size}&q_artist=${q_artist}" | jq )
 
 # outputs
 

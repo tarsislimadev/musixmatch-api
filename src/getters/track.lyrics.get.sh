@@ -10,13 +10,7 @@ echo
 echo "method: ${method}"
 echo
 
-echo musixmatch track id:
-
-track_id=
-
-if [[ -z "${track_id}" ]]; then
-  track_id="${1}"
-fi
+track_id="${1}"
 
 echo
 echo "track_id: ${track_id}"
@@ -24,7 +18,7 @@ echo
 
 # runner
 
-resp=$( bash musixmatch.sh "${method}" "track_id=${track_id}" | jq )
+resp=$( bash curl.sh "${method}" "track_id=${track_id}" | jq )
 
 # outputs
 

@@ -8,19 +8,15 @@ method="album.get"
 
 echo
 echo "method: ${method}"
+
+album_id="${1}"
+
 echo
-
-echo musixmatch album_id:
-
-album_id=
-
-if [[ -z "${album_id}" ]]; then
-  album_id="${1}"
-fi
+echo "album_id: ${album_id}"
 
 # runner
 
-resp=$( bash musixmatch.sh "${method}" "album_id=${album_id}" | jq )
+resp=$( bash curl.sh "${method}" "album_id=${album_id}" | jq )
 
 # outputs
 

@@ -10,17 +10,21 @@ echo
 echo "method: ${method}"
 echo
 
-echo musixmatch album_id:
+album_id="${1}"
 
-album_id=
+echo
+echo "album_id: ${album_id}"
+echo
 
-if [[ -z "${album_id}" ]]; then
-  album_id="${1}"
-fi
+page_size=80
+
+echo
+echo "page_size: ${page_size}"
+echo
 
 # runner
 
-resp=$( bash musixmatch.sh "${method}" "page_size=80&album_id=${album_id}" | jq )
+resp=$( bash curl.sh "${method}" "page_size=${page_size}&album_id=${album_id}" | jq )
 
 # outputs
 
