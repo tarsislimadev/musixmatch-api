@@ -28,6 +28,6 @@ echo
 
 bash "./src/getters/${to}.sh" "${album_id}"
 
-sleep 2
+sleep "${SLEEP_TIME}"
 
 done

@@ -36,10 +36,10 @@ echo
 
 bash "./src/getters/${to}.sh" "${track_id}"
 
-sleep 2
+sleep "${SLEEP_TIME}"
 
 done
 
-sleep 2
+sleep "${SLEEP_TIME}"
 
 done

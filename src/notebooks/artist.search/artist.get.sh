@@ -36,10 +36,10 @@ echo
 
 bash ./src/getters/artist.get.sh "${artist_id}"
 
-sleep 2
+sleep "${SLEEP_TIME}"
 
 done
 
-sleep 2
+sleep "${SLEEP_TIME}"
 
 done
