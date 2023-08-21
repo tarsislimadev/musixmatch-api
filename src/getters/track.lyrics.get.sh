@@ -22,6 +22,6 @@ resp=$( bash curl.sh "${method}" "track_id=${track_id}" | jq )
 
 # outputs
 
-bash create_file.sh "${method}" "${track_id}" "track_id" "${track_id}"
+bash create.sh "${method}" "${track_id}" "track_id" "${track_id}"
 
-bash create_file.sh "${method}" "${track_id}" "json" "${resp}"
+bash create.sh "${method}" "${track_id}" "json" "${resp}"

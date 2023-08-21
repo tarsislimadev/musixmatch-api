@@ -34,6 +34,6 @@ resp=$( bash curl.sh "${method}" "page_size=${page_size}&q_artist=${q_artist}" |
 
 # outputs
 
-bash create_file.sh "${method}" "${q_artist}" "q_artist" "${q_artist}"
+bash create.sh "${method}" "${q_artist}" "q_artist" "${q_artist}"
 
-bash create_file.sh "${method}" "${q_artist}" "json" "${resp}"
+bash create.sh "${method}" "${q_artist}" "json" "${resp}"

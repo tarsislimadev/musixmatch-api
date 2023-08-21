@@ -20,6 +20,6 @@ resp=$( bash curl.sh "${method}" "artist_id=${artist_id}" | jq )
 
 # outputs
 
-bash create_file.sh "${method}" "${artist_id}" "artist_id" "${artist_id}"
+bash create.sh "${method}" "${artist_id}" "artist_id" "${artist_id}"
 
-bash create_file.sh "${method}" "${artist_id}" "json" "${resp}"
+bash create.sh "${method}" "${artist_id}" "json" "${resp}"

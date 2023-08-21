@@ -26,8 +26,8 @@ lyrics_body=$( echo "${body}" | jq '.lyrics?.lyrics_body' | sed -e 's/\\n/. /ig'
 
 # outputs
 
-bash create_file "${to}" "${lyrics_id}" "lyrics_id" "${lyrics_id}"
+bash create "${to}" "${lyrics_id}" "lyrics_id" "${lyrics_id}"
 
-bash create_file "${to}" "${lyrics_id}" "lyrics_body" "${lyrics_body}"
+bash create "${to}" "${lyrics_id}" "lyrics_body" "${lyrics_body}"
 
 done

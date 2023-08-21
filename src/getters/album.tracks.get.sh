@@ -28,6 +28,6 @@ resp=$( bash curl.sh "${method}" "page_size=${page_size}&album_id=${album_id}" |
 
 # outputs
 
-bash create_file.sh "${method}" "${album_id}" "album_id" "${album_id}"
+bash create.sh "${method}" "${album_id}" "album_id" "${album_id}"
 
-bash create_file.sh "${method}" "${album_id}" "json" "${resp}"
+bash create.sh "${method}" "${album_id}" "json" "${resp}"
