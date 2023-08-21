@@ -34,10 +34,10 @@ echo
 
 bash ./src/getters/album.get.sh "${album_id}"
 
-sleep "${SLEEP_TIME}"
+sleep 1
 
 done
 
-sleep "${SLEEP_TIME}"
+sleep 1
 
 done

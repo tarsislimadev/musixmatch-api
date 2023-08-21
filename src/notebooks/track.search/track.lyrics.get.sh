@@ -34,10 +34,10 @@ echo
 
 bash ./src/getters/track.lyrics.get.sh "${track_id}"
 
-sleep "${SLEEP_TIME}"
+sleep 1
 
 done
 
-sleep "${SLEEP_TIME}"
+sleep 1
 
 done
