@@ -20,6 +20,6 @@ dir="${DATABASE}/${index}/${id}"
 
 mkdir -p "${dir}"
 touch "${dir}/${file}"
-echo "${content}" > "${dir}/${file}" 
+bash ./lines.sh "${content}" > "${dir}/${file}" 
 
 echo written $( expr length "${content}" ) bytes in "${dir}/${file}" 
