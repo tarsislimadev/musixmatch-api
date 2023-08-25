@@ -34,6 +34,8 @@ echo
 echo "track_id: ${track_id}"
 echo
 
+# outputs
+
 bash "./src/getters/${to}.sh" "${track_id}"
 
 sleep 1
