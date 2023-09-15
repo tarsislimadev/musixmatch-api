@@ -1,4 +1,4 @@
-# (MusixMatch)[https://developer.musixmatch.com/]
+# [MusixMatch](https://developer.musixmatch.com/)
 
 MusixMatch API
 
