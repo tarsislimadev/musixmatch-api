@@ -1,8 +1,8 @@
-# MusixMatch
+# (MusixMatch)[https://developer.musixmatch.com/]
 
-From MusixMatch to local file system
+MusixMatch API
 
-## .env file
+## .env
 
 ```
 DATABASE=~/musixmatch
