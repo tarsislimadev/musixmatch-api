@@ -16,7 +16,7 @@ echo "album_id: ${album_id}"
 
 # runner
 
-resp=$( bash curl.sh "${method}" "album_id=${album_id}" | jq )
+resp=$( bash curl.sh "${method}" "album_id=${album_id}" )
 
 # outputs
 

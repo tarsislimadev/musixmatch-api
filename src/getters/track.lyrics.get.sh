@@ -18,7 +18,7 @@ echo
 
 # runner
 
-resp=$( bash curl.sh "${method}" "track_id=${track_id}" | jq )
+resp=$( bash curl.sh "${method}" "track_id=${track_id}" )
 
 # outputs
 

@@ -24,7 +24,7 @@ echo
 
 # runner
 
-resp=$( bash curl.sh "${method}" "page_size=${page_size}&album_id=${album_id}" | jq )
+resp=$( bash curl.sh "${method}" "page_size=${page_size}&album_id=${album_id}" )
 
 # outputs
 

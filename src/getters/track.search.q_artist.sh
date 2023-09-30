@@ -30,7 +30,7 @@ echo
 
 # runner
 
-resp=$( bash curl.sh "${method}" "page_size=${page_size}&q_artist=${q_artist}" | jq )
+resp=$( bash curl.sh "${method}" "page_size=${page_size}&q_artist=${q_artist}" )
 
 # outputs
 
