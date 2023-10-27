@@ -4,6 +4,10 @@ Bring lyrics on your application with the Musixmatch API
 
 To get data from MusixMatch API
 
+## social & donate
+
+[Donate](https://link.mercadopago.com.br/brtmvdl) - [Telegram](https://t.me/+KRmg5MlqgMk0MTg5) - [Discord](https://discord.gg/4JFAWPYs)
+
 ## how to install
 
 ### write .env file
