@@ -1,8 +1,8 @@
 # [MusixMatch](https://developer.musixmatch.com/)
 
-"Bring lyrics on your application with the Musixmatch API"
+Bring lyrics on your application with the Musixmatch API
 
-To get data from MusixMatch API.
+To get data from MusixMatch API
 
 ## how to install
 
