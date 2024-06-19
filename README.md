@@ -1,6 +1,6 @@
 # [MusixMatch](https://developer.musixmatch.com/)
 
-To get data from MusixMatch API
+To make music with MusixMatch API
 
 ## social & donate
 
@@ -17,18 +17,6 @@ MUSIXMATCH_APIKEY=000000000x0000000xx0000xxxx00b0x
 ```
 
 ## how to use
-
-### Search track by artist
-
-```
-bash ./src/getters/track.search.q_artist.sh "Pitty"
-```
-
-### Search track by lyrics word
-
-```
-bash ./src/getters/track.search.q_lyrics.sh "Te vejo errando, isso não é pecado"
-```
 
 ## license
 
