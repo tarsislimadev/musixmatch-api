@@ -16,6 +16,14 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
   console.log('a user connected')
+
+  socket.on('message', (data) => {
+    console.log('socket on message', data)
+  })
+
+  socket.on('message 01', (data) => {
+    console.log('socket on message 01', data)
+  })
 })
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`))
