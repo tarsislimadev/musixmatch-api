@@ -1,10 +1,11 @@
-import { Model } from './model.js'
+import { Model } from '../models/model.js' // './model.js'
 
 export class MessageModel extends Model {
-  message = ''
+  type = null
+  text = ''
 
-  constructor(message) {
+  constructor(text = '') {
     super()
-    this.message = message
+    this.text = text
   }
 }

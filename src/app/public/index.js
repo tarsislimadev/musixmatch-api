@@ -1,116 +1,131 @@
-import { HTML, nFlex } from '@brtmvdl/frontend'
+import { HTML } from '@brtmvdl/frontend'
+import { SocketMessageComponent } from './components/socket.message.component.js'
+import { TwoColumnsComponent } from './components/two.columns.component.js'
 import { ImageLinkComponent } from './components/image.link.component.js'
+import { PaddingComponent } from './components/padding.component.js'
 import { SelectComponent } from './components/select.component.js'
 import { ButtonComponent } from './components/button.component.js'
-import { InputsComponent } from './components/inputs.component.js'
-import { TextComponent } from './components/text.component.js'
-import { RequestModel } from './models/request.model.js'
-import { MessageModel } from './models/message.model.js'
-import { getMethodsList, getMethodQuery } from './utils/lists.js'
+import { InputComponent } from './components/input.component.js'
+import { getEndpointsList } from './utils/endpoints.list.js'
 
-export class Page extends HTML {
-  state = {
-    io: io(),
-    socket: null,
-  }
+import { SocketMessageModel } from './models/socket.message.model.js'
+
+export class Page extends PaddingComponent {
+  state = { io: new io() }
 
   children = {
-    select: new SelectComponent('API Methods'),
-    form: new HTML(),
-    inputs: new InputsComponent(),
+    query: new HTML(),
+    endpoints: new SelectComponent({ label: 'endpoint' }),
     messages: new HTML(),
+    inputs: {
+      apikey: new InputComponent({ label: 'apikey', value: Date.now().toString(), type: 'password' }),
+      album_id: new InputComponent({ label: 'album_id', type: 'number' }),
+      album_mbid: new InputComponent({ label: 'album_mbid' }),
+      artist_id: new InputComponent({ label: 'artist_id', type: 'number' }),
+      artist_mbid: new InputComponent({ label: 'artist_mbid' }),
+      chart_name: new InputComponent({ label: 'chart_name' }),
+      commontrack_id: new InputComponent({ label: 'commontrack_id', type: 'number' }),
+      country: new InputComponent({ label: 'country' }),
+      domain: new InputComponent({ label: 'domain' }),
+      f_artist_id: new InputComponent({ label: 'f_artist_id', type: 'number' }),
+      f_artist_mbid: new InputComponent({ label: 'f_artist_mbid' }),
+      f_has_lyrics: new InputComponent({ label: 'f_has_lyrics' }),
+      f_richsync_length: new InputComponent({ label: 'f_richsync_length' }),
+      f_richsync_length_max_deviation: new InputComponent({ label: 'f_richsync_length_max_deviation' }),
+      f_subtitle_length: new InputComponent({ label: 'f_subtitle_length' }),
+      f_subtitle_length_max_deviation: new InputComponent({ label: 'f_subtitle_length_max_deviation' }),
+      format: new InputComponent({ label: 'format' }),
+      formatDecide: new InputComponent({ label: 'formatDecide' }),
+      g_album_name: new InputComponent({ label: 'g_album_name' }),
+      min_completed: new InputComponent({ label: 'min_completed' }),
+      page: new InputComponent({ label: 'page', value: '1', type: 'number' }),
+      page_size: new InputComponent({ label: 'page_size', value: '100', type: 'number' }),
+      q: new InputComponent({ label: 'q' }),
+      q_album: new InputComponent({ label: 'q_album' }),
+      q_artist: new InputComponent({ label: 'q_artist' }),
+      q_lyrics: new InputComponent({ label: 'q_lyrics' }),
+      q_track: new InputComponent({ label: 'q_track' }),
+      q_track_artist: new InputComponent({ label: 'q_track_artist' }),
+      q_writer: new InputComponent({ label: 'q_writer' }),
+      quorum_factor: new InputComponent({ label: 'quorum_factor' }),
+      selected_language: new InputComponent({ label: 'selected_language' }),
+      subtitle_format: new InputComponent({ label: 'subtitle_format' }),
+      track_id: new InputComponent({ label: 'track_id', type: 'number' }),
+      track_isrc: new InputComponent({ label: 'track_isrc' }),
+      track_mbid: new InputComponent({ label: 'track_mbid' }),
+    }
   }
 
   onCreate() {
     super.onCreate()
-    this.setSocketEvents()
-    this.append(this.getHeaderComponent())
-    this.append(this.getBodyComponent())
+    this.setEvents()
+    this.append(this.getHeader())
+    this.append(this.getBody())
   }
 
-  setSocketEvents() {
-    this.state.io.on('connection', (socket) => {
-      socket.on('message', (message) => this.onSocketMessage(message))
-      this.state.socket = socket
+  setEvents() {
+    this.state.io.on('connect', () => console.log('connect', { datetime: Date.now() }))
+    this.state.io.on('disconnect', () => console.log('disconnect', { datetime: Date.now() }))
+  }
+
+  getHeader() {
+    return new TwoColumnsComponent({
+      html1: new ImageLinkComponent({ src: './logo.png', href: 'https://developer.musixmatch.com/' }),
+      html2: new HTML(),
     })
   }
 
-  onSocketMessage(message) {
-    console.log('on socket message', message)
+  getBody() {
+    return new TwoColumnsComponent({
+      html1: this.getForm(),
+      html2: this.getMessages()
+    })
   }
 
-  getHeaderComponent() {
-    const logo = new ImageLinkComponent('./logo.png', 'https://developer.musixmatch.com/')
-    logo.children.image.setStyle('margin', 'calc(1rem / 1) 0rem')
-    logo.children.image.setContainerStyle('width', '10rem')
-    logo.children.image.setStyle('text-aling', 'center')
-    return logo
+  getForm() {
+    const form = new HTML()
+    form.append(this.getEndpointsSelect())
+    form.append(this.getQueryComponent())
+    form.append(new ButtonComponent({ text: 'send', onclick: () => this.onSendButtonClick() }))
+    return form
   }
 
-  getBodyComponent() {
-    const flex = new nFlex()
-    flex.append(this.getLeftBodyComponent())
-    flex.append(this.getRightBodyComponent())
-    return flex
+  getEndpointsSelect() {
+    this.children.endpoints.on('change', () => this.onEndpointsSelectChange())
+    Array.from(getEndpointsList()).map(({ name }) => this.children.endpoints.children.input.addOption(name, name))
+    return this.children.endpoints
   }
 
-  getRightHeaderComponent() {
-    return new HTML()
+  getQueryComponent() {
+    return this.children.query
   }
 
-  getLeftBodyComponent() {
-    const html = new HTML()
-    html.append(this.getMethodSelect())
-    html.append(this.getFormHTML())
-    html.append(this.getSendButton())
-    return html
+  getSelectedEndpoint() {
+    const endpointsValue = this.children.endpoints.getValue()
+    return getEndpointsList().find(({ name }) => name == endpointsValue)
   }
 
-  getMethodSelect() {
-    Array.from(getMethodsList()).map(({ name }) => this.children.select.addOption(name, name))
-    this.children.select.on('change', () => this.onMethodSelect({ value: this.children.select.getValue() }))
-    return this.children.select
-  }
-
-  onMethodSelect({ value } = {}) {
-    this.children.form.clear()
-    Array.from(getMethodQuery(this.children.select.getValue())).map((q) => this.children.form.append(this.children.inputs.getComponent(q)))
-  }
-
-  getFormHTML() {
-    return this.children.form
-  }
-
-  getSendButton() {
-    return new ButtonComponent('send', () => this.onSendButtonClick())
+  onEndpointsSelectChange() {
+    const endpoint = this.getSelectedEndpoint()
+    this.children.query.clear()
+    Array.from(endpoint.query).map((component) => this.children.query.append(this.children.inputs[component]))
   }
 
   onSendButtonClick() {
-    const method = this.children.select.getValue()
-    const m = getMethodsList().find(({ name }) => name == method)
-    this.sendSocketMessage({ name: method.name, url: method.url, method: method.method })
+    const endpoint = this.getSelectedEndpoint()
+    const query = Array.from(endpoint.query).reduce((q, component) => ({ ...q, [component]: this.children.inputs[component]?.getValue() }), {})
+    this.sendMessage(new SocketMessageModel(endpoint.name, query))
   }
 
-  getMethodUrl(m = new RequestModel()) {
-    const search = Array.from(m.query).map((q) => [q, this.children.inputs.getValue(q)].join('=')).join('&')
-    return `${m.url}?${search}`
+  sendMessage(message = new SocketMessageModel()) {
+    this.addSocketMessage(message)
   }
 
-  sendSocketMessage(message = {}) {
-    this.state.io.emit('message 01', JSON.stringify(message))
+  addSocketMessage(message = new SocketMessageModel()) {
+    this.children.messages.prepend(new SocketMessageComponent(message))
   }
 
-  getRightBodyComponent() {
+  getMessages() {
     return this.children.messages
-  }
-
-  addMessage(message = new MessageModel()) {
-    this.children.messages.append(this.createMessageComponent(message))
-  }
-
-  createMessageComponent(model = new MessageModel()) {
-    const message = new HTML()
-    message.append(new TextComponent(model.message))
-    return message
   }
 }

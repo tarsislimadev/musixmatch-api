@@ -4,7 +4,8 @@ export class InputComponent extends HTML {
   state = {
     label: '',
     value: '',
-    placeholder: ''
+    type: 'text',
+    placeholder: '',
   }
 
   children = {
@@ -13,11 +14,12 @@ export class InputComponent extends HTML {
     error: new HTML(),
   }
 
-  constructor(label, value = '', placeholder = '') {
+  constructor({ label = '', value = '', type = 'text', placeholder = '' } = {}) {
     super()
     this.state.label = label
     this.state.value = value
-    this.state.placeholder = placeholder
+    this.state.type = type
+    this.state.placeholder = label || placeholder
   }
 
   onCreate() {
@@ -28,13 +30,18 @@ export class InputComponent extends HTML {
   }
 
   getLabel() {
-    this.children.label.setText(this.state.label)
+    if (this.state.label) this.children.label.setText(this.state.label)
     return this.children.label
   }
 
   getInput() {
-    this.children.input.setValue(this.state.value)
-    this.children.input.setAttr('placeholder', this.state.placeholder)
+    this.children.input.setPlaceholder(this.state.placeholder?.toString())
+    this.children.input.setValue(this.state.value?.toString())
+    this.children.input.setAttr('type', this.state.type?.toString())
+    this.children.input.setStyle('margin', '0rem 0rem calc(1rem / 4) 0rem')
+    this.children.input.setStyle('padding', 'calc(1rem / 4)')
+    this.children.input.setStyle('box-sizing', 'border-box')
+    this.children.input.setStyle('width', '100%')
     return this.children.input
   }
 
@@ -45,5 +52,4 @@ export class InputComponent extends HTML {
   getValue() {
     return this.children.input.getValue()
   }
-
 }

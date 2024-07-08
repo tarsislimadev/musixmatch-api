@@ -1,23 +1,18 @@
-import { HTML, nImage, nLink } from '@brtmvdl/frontend'
+import { HTML } from '@brtmvdl/frontend'
+import { LinkComponent } from './link.component.js'
+import { ImageComponent } from './image.component.js'
 
 export class ImageLinkComponent extends HTML {
-  state = {
-    src: '',
-    href: '',
-    alt: '',
-  }
+  src = ''
+  href = ''
 
-  children = {
-    link: new nLink(),
-    image: new nImage(),
-  }
-
-  constructor(src, href = '?', alt = 'image') {
+  constructor({ src = '', href = '#' } = {}) {
     super()
-    this.state.src = src
-    this.state.href = href
-    this.state.alt = alt
+    this.src = src
+    this.href = href
   }
+
+  getName() { return 'image-link-component' }
 
   onCreate() {
     super.onCreate()
@@ -25,14 +20,14 @@ export class ImageLinkComponent extends HTML {
   }
 
   getLink() {
-    this.children.link.href(this.state.href)
-    this.children.link.append(this.getImage())
-    return this.children.link
+    const link = new LinkComponent({ href: this.href })
+    link.append(this.getImage())
+    return link
   }
 
   getImage() {
-    this.children.image.src(this.state.src)
-    this.children.image.alt(this.state.alt)
-    return this.children.image
+    const image = new ImageComponent({ src: this.src, alt: this.href })
+    image.setAttr('src', this.src)
+    return image
   }
 }
